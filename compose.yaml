@@ -1,0 +1,48 @@
+services:
+  mqtt-broker:
+    build:
+      context:  ./mqtt/mosquitto
+      dockerfile: Dockerfile
+    container_name: mosquitto-broker
+    restart: always
+    volumes:
+      - ./mqtt/mosquitto/config:/mosquitto/config
+      - ./mqtt/mosquitto/data:/mosquitto/data
+      - ./mqtt/mosquitto/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    networks:
+      - flame_network
+
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    restart: always
+    depends_on:
+      - mysql-db
+      - mqtt-broker
+    env_file: ./backend/.env
+    networks:
+      - flame_network
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: system-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: flame_detection_system
+      MYSQL_ROOT_PASSWORD: 123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - flame_network
+
+networks:
+  flame_network:
+    driver: bridge
+volumes:
+  mysql_data:
