@@ -1,0 +1,19 @@
+Added Pin To Net: NetName=3.3V Pin=Header10-03
+Added Pin To Net: NetName=NetA0_02 Pin=Header10-04
+Added Pin To Net: NetName=3.3V Pin=J5-03
+Added Pin To Net: NetName=NetA0_02 Pin=J5-04
+Change Net Name : Old Net Name=NetA0_02 New Net Name=GND
+Change Net Name : Old Net Name=NetA0_04 New Net Name=A0
+Change Net Name : Old Net Name=NetA1_04 New Net Name=A1
+Change Net Name : Old Net Name=NetA2_04 New Net Name=A2
+Change Net Name : Old Net Name=NetA3_04 New Net Name=A3
+Change Net Name : Old Net Name=NetA4_04 New Net Name=A4
+Change Net Name : Old Net Name=NetA5_04 New Net Name=A5
+Change Net Name : Old Net Name=NetD8_04 New Net Name=D8
+Change Net Name : Old Net Name=NetD9_04 New Net Name=D9
+Change Net Name : Old Net Name=NetD10_04 New Net Name=D10
+Change Net Name : Old Net Name=NetD11_04 New Net Name=D11
+Change Net Name : Old Net Name=NetD12_04 New Net Name=D12
+Change Net Name : Old Net Name=NetD13_04 New Net Name=D13
+Change Net Name : Old Net Name=NetHeader10_01 New Net Name=SCL
+Change Net Name : Old Net Name=NetHeader10_02 New Net Name=SDA

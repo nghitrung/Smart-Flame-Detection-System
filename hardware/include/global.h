@@ -6,6 +6,7 @@
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 
+#define BUTTON_CONFIG GPIO_NUM_0
 #define SMOKE1_PIN A0
 #define SMOKE2_PIN A1
 #define FLAME1_PIN A2

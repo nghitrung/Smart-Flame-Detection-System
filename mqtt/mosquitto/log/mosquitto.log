@@ -3100,3 +3100,132 @@ To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
 
 1774193884: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
 
+1774629984: mosquitto version 2.1.2 starting
+1774629984: Config loaded from /mosquitto/config/mosquitto.conf.
+1774629984: Bridge support available.
+1774629984: Persistence support available.
+1774629984: TLS support available.
+1774629984: TLS-PSK support available.
+1774629984: Websockets support available.
+1774629984: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1774629984: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1774629984: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1774629984: Plugin builtin-security has registered to receive 'basic-auth' events.
+1774629984: Opening ipv4 listen socket on port 1883.
+1774629984: Opening ipv6 listen socket on port 1883.
+1774629984: Opening ipv4 listen socket on port 9001.
+1774629984: Opening ipv6 listen socket on port 9001.
+1774629984: mosquitto version 2.1.2 running
+1774631940: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774631940: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774631940: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774631940: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774633941: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774633941: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774633941: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774633941: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774635942: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774635942: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774635942: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774635942: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774637943: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774637943: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774637943: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774637943: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774639944: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774639944: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774639944: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774639944: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774641946: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774641946: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774641946: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774641946: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774643947: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774643947: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774643947: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774643947: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774645948: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774645948: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774645948: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774645948: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774647949: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774647949: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774647949: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774647949: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1774649950: Saving in-memory database to /mosquitto/data//moquistto.db.
+1774649950: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1774649950: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1774649950: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1775097947: mosquitto version 2.1.2 starting
+1775097947: Config loaded from /mosquitto/config/mosquitto.conf.
+1775097947: Bridge support available.
+1775097947: Persistence support available.
+1775097947: TLS support available.
+1775097947: TLS-PSK support available.
+1775097947: Websockets support available.
+1775097947: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1775097947: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1775097947: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1775097947: Plugin builtin-security has registered to receive 'basic-auth' events.
+1775097947: Opening ipv4 listen socket on port 1883.
+1775097947: Opening ipv6 listen socket on port 1883.
+1775097947: Opening ipv4 listen socket on port 9001.
+1775097947: Opening ipv6 listen socket on port 9001.
+1775097947: mosquitto version 2.1.2 running
+1775098054: mosquitto version 2.1.2 terminating
+1775098054: Saving in-memory database to /mosquitto/data//moquistto.db.
+1775098054: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1775098054: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1775098054: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+

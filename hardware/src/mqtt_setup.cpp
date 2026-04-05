@@ -1,4 +1,4 @@
-#include <WiFi.h>
+#include <WiFiManager.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include "mqtt_setup.h"
@@ -56,21 +56,26 @@ String packageData(const char* topic) {
 }
 
 void vTaskMqtt(void* pvParameters) {
-    client.setServer(mqtt_server, 1883);
     client.setCallback(callback);
+
     while (1) {
         if (WiFi.status() == WL_CONNECTED) {
             if (!client.connected()) {
-                if (xMqttMutex != NULL && xSemaphoreTake(xMqttMutex, portMAX_DELAY) == pdPASS) {
-                    Serial.print("\nMQTT: Connecting...");
-                    String clientID = "YoloUno-Trung";
-                    if (client.connect(clientID.c_str(), "Flame_Detection_System", "123")){
-                        Serial.print("\nSUCCESS");
-                    } else {
-                        Serial.print("\nFAILED, rc= "); Serial.println(client.state());
+                if (String(mqtt_server) != "NO_IP") {
+                    if (xMqttMutex != NULL && xSemaphoreTake(xMqttMutex, portMAX_DELAY) == pdPASS) {
+                        Serial.printf("\nMQTT: Connecting to %s...", mqtt_server);
+                        client.setServer(mqtt_server, 1883);
+                        String clientID = "YoloUno-Trung";
+                        if (client.connect(clientID.c_str(), "Flame_Detection_System", "123")){
+                            Serial.print("\nSUCCESS");
+                        } else {
+                            Serial.print("\nFAILED, rc= "); Serial.println(client.state());
+                        }
+                        xSemaphoreGive(xMqttMutex);
                     }
-                    xSemaphoreGive(xMqttMutex);
-                } 
+                } else {
+                    Serial.print("\nWarning: Broker IP not configured yet!");
+                }  
             } else {
                 if (xMqttMutex != NULL && xSemaphoreTake(xMqttMutex, portMAX_DELAY) == pdPASS) {
                     client.loop();
@@ -88,6 +93,6 @@ void vTaskMqtt(void* pvParameters) {
             }
         }
 
-        vTaskDelay(pdMS_TO_TICKS(500)); // MQTT beat
+        vTaskDelay(pdMS_TO_TICKS(5000)); // MQTT beat
     }
 }

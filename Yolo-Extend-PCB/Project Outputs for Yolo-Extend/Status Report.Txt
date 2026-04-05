@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [Yolo-Extend.PrjPcb]
+   Generated File[PCB.TXT]
+   Generated File[PCB.LDP]
+   Generated File[PCB.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 4:38:30 PM On 3/25/2026

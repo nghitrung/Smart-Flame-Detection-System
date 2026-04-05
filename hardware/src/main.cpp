@@ -18,11 +18,11 @@ void setup() {
     if (xWifiMutex != NULL && xMqttMutex != NULL && xSensorMutex != NULL) {
         xTaskCreate(vTaskWifi, "WiFi_Task", 4096, NULL, 3, NULL);
         
-        xTaskCreate(vTaskMqtt, "MQTT_Task", 4096, NULL, 3, NULL);
+        xTaskCreate(vTaskMqtt, "MQTT_Task", 4096, NULL, 2, NULL);
 
-        xTaskCreate(vTaskSmoke, "Smoke_Task", 4096, NULL, 1, NULL);
+        //xTaskCreate(vTaskSmoke, "Smoke_Task", 4096, NULL, 1, NULL);
 
-        xTaskCreate(vTaskFlame, "Flame_Task", 4096, NULL, 1, NULL);
+        //xTaskCreate(vTaskFlame, "Flame_Task", 4096, NULL, 1, NULL);
         
         Serial.println("System is working!");
     } else {

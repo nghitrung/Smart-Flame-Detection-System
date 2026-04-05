@@ -1,9 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define ssid "Mai Quynh"
-#define password "70739905"
-#define mqtt_server "192.168.1.172"
+extern char mqtt_server[40];
 
 // === TOPICS ===
 #define TOPIC_FLAME "yolo_uno/sensors/flame"
