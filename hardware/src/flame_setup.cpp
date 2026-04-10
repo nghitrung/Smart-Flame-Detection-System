@@ -2,12 +2,13 @@
 #include "global.h"
 
 void vTaskFlame(void *pvParameter) {
-    
-    float rawValue1 = analogRead(FLAME1_PIN);
-    float rawValue2 = analogRead(FLAME2_PIN);
+    pinMode(FLAME1_PIN, INPUT);
+    pinMode(FLAME2_PIN, INPUT);
 
     while (1) {
         if (xSensorMutex != NULL && xSemaphoreTake(xSensorMutex, portMAX_DELAY) == pdPASS) {
+            float rawValue1 = digitalRead(FLAME1_PIN);
+            float rawValue2 = digitalRead(FLAME2_PIN);
             if (isnan(rawValue1) || isnan(rawValue2)) {
                 Serial.print("\nValue is unreadable!"); 
             } else {

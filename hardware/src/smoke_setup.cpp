@@ -3,9 +3,10 @@
 #include "global.h"
 
 void vTaskSmoke(void *pvParameter) {
-    MQGasKit mq2_1(SMOKE1_PIN, MQ2);
-    MQGasKit mq2_2(SMOKE2_PIN, MQ2);  
 
+    MQGasKit mq2_1(SMOKE1_PIN, MQ2);
+    MQGasKit mq2_2(SMOKE2_PIN, MQ2); 
+    
     mq2_1.calibrate();
     mq2_2.calibrate();
 

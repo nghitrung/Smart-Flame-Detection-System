@@ -1,7 +1,7 @@
 services:
   mqtt-broker:
     build:
-      context:  ./mqtt/mosquitto
+      context:  ./mqtt
       dockerfile: Dockerfile
     container_name: mosquitto-broker
     restart: always
@@ -20,9 +20,11 @@ services:
       context: ./backend
     container_name: backend
     restart: always
+    ports:
+      - "5000:5000"
     depends_on:
-      - mysql-db
-      - mqtt-broker
+      mysql-db:
+        condition: service_healthy
     env_file: ./backend/.env
     networks:
       - flame_network
@@ -36,6 +38,10 @@ services:
       MYSQL_ROOT_PASSWORD: 123
     ports:
       - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
     volumes:
       - mysql_data:/var/lib/mysql
     networks:

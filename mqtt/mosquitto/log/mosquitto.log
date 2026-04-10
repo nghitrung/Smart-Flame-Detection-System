@@ -3229,3 +3229,123 @@ To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
 
 1775098054: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
 
+1775793313: mosquitto version 2.1.2 starting
+1775793313: Config loaded from /mosquitto/config/mosquitto.conf.
+1775793313: Bridge support available.
+1775793313: Persistence support available.
+1775793313: TLS support available.
+1775793313: TLS-PSK support available.
+1775793313: Websockets support available.
+1775793313: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1775793313: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1775793313: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1775793313: Plugin builtin-security has registered to receive 'basic-auth' events.
+1775793313: Opening ipv4 listen socket on port 1883.
+1775793313: Opening ipv6 listen socket on port 1883.
+1775793313: Opening ipv4 listen socket on port 9001.
+1775793313: Opening ipv6 listen socket on port 9001.
+1775793313: mosquitto version 2.1.2 running
+1775793318: New connection from 172.19.0.4:55220 on port 1883.
+1775793318: New client connected from 172.19.0.4:55220 as mqttjs_233ba6fd (p4, c1, k60, u'Flame_Detection_System').
+1775793324: Client mqttjs_233ba6fd [172.19.0.4:55220] disconnected: connection closed by client.
+1775793325: mosquitto version 2.1.2 terminating
+1775793325: Saving in-memory database to /mosquitto/data//moquistto.db.
+1775793325: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1775793325: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1775793325: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1775795674: mosquitto version 2.1.2 starting
+1775795674: Config loaded from /mosquitto/config/mosquitto.conf.
+1775795674: Bridge support available.
+1775795674: Persistence support available.
+1775795674: TLS support available.
+1775795674: TLS-PSK support available.
+1775795674: Websockets support available.
+1775795674: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1775795674: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1775795674: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1775795674: Plugin builtin-security has registered to receive 'basic-auth' events.
+1775795674: Opening ipv4 listen socket on port 1883.
+1775795674: Opening ipv6 listen socket on port 1883.
+1775795674: Opening ipv4 listen socket on port 9001.
+1775795674: Opening ipv6 listen socket on port 9001.
+1775795674: mosquitto version 2.1.2 running
+1775795679: New connection from 172.18.0.4:39404 on port 1883.
+1775795679: New client connected from 172.18.0.4:39404 as mqttjs_0afb6728 (p4, c1, k60, u'Flame_Detection_System').
+1775795691: mosquitto version 2.1.2 terminating
+1775795691: Saving in-memory database to /mosquitto/data//moquistto.db.
+1775795691: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1775795691: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1775795691: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1775795692: mosquitto version 2.1.2 starting
+1775795692: Config loaded from /mosquitto/config/mosquitto.conf.
+1775795692: Bridge support available.
+1775795692: Persistence support available.
+1775795692: TLS support available.
+1775795692: TLS-PSK support available.
+1775795692: Websockets support available.
+1775795692: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1775795692: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1775795692: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1775795692: Plugin builtin-security has registered to receive 'basic-auth' events.
+1775795692: Opening ipv4 listen socket on port 1883.
+1775795692: Opening ipv6 listen socket on port 1883.
+1775795692: Opening ipv4 listen socket on port 9001.
+1775795692: Opening ipv6 listen socket on port 9001.
+1775795692: mosquitto version 2.1.2 running
+1775795692: New connection from 172.18.0.4:57206 on port 1883.
+1775795692: New client connected from 172.18.0.4:57206 as mqttjs_0afb6728 (p4, c1, k60, u'Flame_Detection_System').
+1775796115: Client mqttjs_0afb6728 [172.18.0.4:57206] disconnected: connection closed by client.
+1775796115: mosquitto version 2.1.2 terminating
+1775796115: Saving in-memory database to /mosquitto/data//moquistto.db.
+1775796115: Warning: File /mosquitto/data//moquistto.db.new has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/data//moquistto.db.new`.
+
+1775796115: Warning: File /mosquitto/data//moquistto.db.new owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/data//moquistto.db.new`.
+
+1775796115: Warning: File /mosquitto/data//moquistto.db.new group is not mosquitto. Future versions will refuse to load this file.
+
+1775827513: mosquitto version 2.1.2 starting
+1775827513: Config loaded from /mosquitto/config/mosquitto.conf.
+1775827513: Bridge support available.
+1775827513: Persistence support available.
+1775827513: TLS support available.
+1775827513: TLS-PSK support available.
+1775827513: Websockets support available.
+1775827513: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1775827513: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1775827513: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1775827513: Plugin builtin-security has registered to receive 'basic-auth' events.
+1775827513: Opening ipv4 listen socket on port 1883.
+1775827513: Opening ipv6 listen socket on port 1883.
+1775827513: Opening ipv4 listen socket on port 9001.
+1775827513: Opening ipv6 listen socket on port 9001.
+1775827513: mosquitto version 2.1.2 running
+1775827515: New connection from 172.18.0.4:39266 on port 1883.
+1775827515: New client connected from 172.18.0.4:39266 as mqttjs_cdf8264b (p4, c1, k60, u'Flame_Detection_System').
+1775827859: Client mqttjs_cdf8264b [172.18.0.4:39266] disconnected: connection closed by client.
+1775827858: mosquitto version 2.1.2 terminating
+1775827858: Saving in-memory database to /mosquitto/data//moquistto.db.
