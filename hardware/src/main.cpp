@@ -5,6 +5,7 @@
 #include "config.h"
 #include "smoke_setup.h"
 #include "flame_setup.h"
+#include "temp_setup.h"
 
 void setup() {
     Serial.begin(115200);
@@ -13,16 +14,20 @@ void setup() {
 
     xWifiMutex = xSemaphoreCreateMutex();
     xMqttMutex = xSemaphoreCreateMutex();
-    xSensorMutex = xSemaphoreCreateMutex();
+    xFlameMutex = xSemaphoreCreateMutex();
+    xSmokeMutex = xSemaphoreCreateMutex();
+    xTempMutex = xSemaphoreCreateMutex();
 
-    if (xWifiMutex != NULL && xMqttMutex != NULL && xSensorMutex != NULL) {
+    if (xWifiMutex != NULL && xMqttMutex != NULL && xFlameMutex != NULL && xSmokeMutex != NULL && xTempMutex != NULL) {
         //xTaskCreate(vTaskWifi, "WiFi_Task", 4096, NULL, 3, NULL);
         
-        //xTaskCreate(vTaskMqtt, "MQTT_Task", 4096, NULL, 2, NULL);
+        //xTaskCreate(vTaskMqtt, "MQTT_Task", 4096, NULL, 3, NULL);
 
         xTaskCreate(vTaskSmoke, "Smoke_Task", 4096, NULL, 1, NULL);
 
         xTaskCreate(vTaskFlame, "Flame_Task", 4096, NULL, 1, NULL);
+
+        xTaskCreate(vTaskTemp, "Flame_Task", 4096, NULL, 1, NULL);
         
         Serial.println("System is working!");
     } else {

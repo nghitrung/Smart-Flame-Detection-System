@@ -82,6 +82,6 @@ void vTaskWifi(void* pvParameters) {
                 xSemaphoreGive(xWifiMutex);
             }         
         }
-        vTaskDelay(pdMS_TO_TICKS(5000)); 
+        vTaskDelay(pdMS_TO_TICKS(3000)); 
     } 
 }

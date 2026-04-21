@@ -1,14 +1,15 @@
-#include <WiFiManager.h>
-#include <PubSubClient.h>
-#include <ArduinoJson.h>
 #include "mqtt_setup.h"
-#include "global.h"
-#include "config.h"
 
 WiFiClient yoloClient;
 PubSubClient client(yoloClient);
+AESLib aesLib;
 long lastPublishTime = 0;
 const long publishInterval = 3000;
+
+byte aes_key[] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6,
+                   0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
+byte AES_IV[N_BLOCK] = { 0x28, 0x34, 0xA5, 0xAF, 0xBE, 0xB8, 0x14, 0xF5,
+                         0x08, 0xE1, 0x24, 0xD2, 0xB3, 0xAB, 0xDB, 0xCE };
 
 void callback(char* topic, byte* payload, unsigned int length) {
 Serial.print("\nMessage arrived [");
@@ -28,31 +29,34 @@ Serial.print("\nMessage arrived [");
     }
 }
 
-String packageData(const char* topic) {
+String encryptData(int value) {
+    byte temp_iv[N_BLOCK];
+    memcpy(temp_iv, AES_IV, sizeof(AES_IV));
+
+    char msg[16];
+    sprintf(msg, "%d", value);
+    int msgLen = strlen(msg);
+
+    int cipher64len = aesLib.get_cipher64_length(msgLen);
+    char cipherData[cipher64len];
+
+    aesLib.encrypt64((byte *)msg, msgLen, (char *)cipherData, aes_key, sizeof(aes_key), temp_iv);
+
+    return String(cipherData);
+}
+
+void packageData() {
     JsonDocument doc;
-    char buffer[256];
+    char buffer[512];
 
-    if (String(topic) == TOPIC_SMOKE) {
-        JsonObject mq2_1_obj = doc["mq2_1"].to<JsonObject>();
-        mq2_1_obj["CO"] = smoke[0][0];
-        mq2_1_obj["LPG"] = smoke[0][1];
-        mq2_1_obj["SMOKE"] = smoke[0][2];
+    doc["smoke_enc_value"] = encryptData(smoke);
+    doc["flame_enc_value"] = encryptData(flame);
+    doc["humid_enc_value"] = encryptData(temp);
 
-        JsonObject mq2_2_obj = doc["mq2_2"].to<JsonObject>();
-        mq2_2_obj["CO"] = smoke[1][0];
-        mq2_2_obj["LPG"] = smoke[1][1];
-        mq2_2_obj["SMOKE"] = smoke[1][2];
-    } else if (String(topic) == TOPIC_FLAME) {
-        JsonObject flame_obj = doc["flame_data"].to<JsonObject>();
-        flame_obj["FLAME1"] = flame[0];
-        flame_obj["FLAME2"] = flame[1];
-    }
     serializeJson(doc, buffer);
-    client.publish(topic, buffer);
+    client.publish(TOPIC_VALUE, buffer);
 
-    Serial.printf("\nPublished to %s: %s", topic, buffer);
-
-    return String(buffer);
+    Serial.printf("\n Published with hash: %s", buffer);
 }
 
 void vTaskMqtt(void* pvParameters) {
@@ -83,9 +87,7 @@ void vTaskMqtt(void* pvParameters) {
                     if (millis() - lastPublishTime >= publishInterval) {
                         lastPublishTime = millis();
 
-                        packageData(TOPIC_SMOKE);
-
-                        packageData(TOPIC_FLAME);
+                        packageData();
                     }
 
                     xSemaphoreGive(xMqttMutex);
@@ -93,6 +95,6 @@ void vTaskMqtt(void* pvParameters) {
             }
         }
 
-        vTaskDelay(pdMS_TO_TICKS(5000)); // MQTT beat
+        vTaskDelay(pdMS_TO_TICKS(3000)); // MQTT beat
     }
 }

@@ -11,14 +11,20 @@
 #define SMOKE2_PIN A1
 #define FLAME1_PIN A2
 #define FLAME2_PIN A3
+#define SDA 11
+#define SCL 12
 #define BUZZER 
 
-extern float smoke[2][3]; /*[{CO_PER1, LPG_PER1, SMOKE_PER1}
-                             {CO_PER2, LPG_PER2, SMOKE_PER2}]*/ 
-extern float flame[2]; // [Flame1, Flame2]
+extern volatile float smoke; // Avg smoke signal 
+extern volatile int flame; // Avg flame signal
+extern volatile float temp; // Temp signal 
+
+extern volatile bool smoke_alert;
 
 extern SemaphoreHandle_t xMqttMutex;
 extern SemaphoreHandle_t xWifiMutex;
-extern SemaphoreHandle_t xSensorMutex;
+extern SemaphoreHandle_t xSmokeMutex;
+extern SemaphoreHandle_t xTempMutex;
+extern SemaphoreHandle_t xFlameMutex;
 
 #endif
