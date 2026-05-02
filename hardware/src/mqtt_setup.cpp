@@ -29,29 +29,26 @@ Serial.print("\nMessage arrived [");
     }
 }
 
-String encryptData(int value) {
+String encryptData(String plainText) {
     byte temp_iv[N_BLOCK];
     memcpy(temp_iv, AES_IV, sizeof(AES_IV));
 
-    char msg[16];
-    sprintf(msg, "%d", value);
-    int msgLen = strlen(msg);
+    uint16_t msgLen = plainText.length();
 
-    int cipher64len = aesLib.get_cipher64_length(msgLen);
-    char cipherData[cipher64len];
+    char cipher64[64];
 
-    aesLib.encrypt64((byte *)msg, msgLen, (char *)cipherData, aes_key, sizeof(aes_key), temp_iv);
+    aesLib.encrypt64((byte *)plainText.c_str(), msgLen, cipher64, aes_key, sizeof(aes_key), temp_iv);
 
-    return String(cipherData);
+    return String(cipher64);
 }
 
 void packageData() {
     JsonDocument doc;
     char buffer[512];
 
-    doc["smoke_enc_value"] = encryptData(smoke);
-    doc["flame_enc_value"] = encryptData(flame);
-    doc["humid_enc_value"] = encryptData(temp);
+    doc["smoke_enc_value"] = encryptData(String(smoke));
+    doc["flame_enc_value"] = encryptData(String(flame));
+    doc["temp_enc_value"] = encryptData(String(temp));
 
     serializeJson(doc, buffer);
     client.publish(TOPIC_VALUE, buffer);

@@ -19,9 +19,9 @@ void setup() {
     xTempMutex = xSemaphoreCreateMutex();
 
     if (xWifiMutex != NULL && xMqttMutex != NULL && xFlameMutex != NULL && xSmokeMutex != NULL && xTempMutex != NULL) {
-        //xTaskCreate(vTaskWifi, "WiFi_Task", 4096, NULL, 3, NULL);
+        xTaskCreate(vTaskWifi, "WiFi_Task", 4096, NULL, 3, NULL);
         
-        //xTaskCreate(vTaskMqtt, "MQTT_Task", 4096, NULL, 3, NULL);
+        xTaskCreate(vTaskMqtt, "MQTT_Task", 4096, NULL, 3, NULL);
 
         xTaskCreate(vTaskSmoke, "Smoke_Task", 4096, NULL, 1, NULL);
 

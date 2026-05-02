@@ -14,10 +14,12 @@ function decryptData(ciphertext) {
 
         const decipher = crypto.createDecipheriv('aes-128-cbc', AES_KEY, AES_IV);
 
+        decipher.setAutoPadding(false);
+
         let decrypted = decipher.update(ciphertext, 'base64', 'utf-8');
         decrypted += decipher.final('utf-8');
 
-        return decrypted;
+        return decrypted.replace(/\0+$/g, "").trim();
     } catch (error) {
         console.error('Decrypted Error:', error.message);
         return null;
@@ -51,26 +53,14 @@ const initMQTT = () => {
 
             const smokeVal = decryptData(payload.smoke_enc_value);
             const flameVal = decryptData(payload.flame_enc_value);
-            const humidVal = decryptData(payload.humid_enc_value);
+            const tempVal = decryptData(payload.temp_enc_value);
 
-            if (smokeVal !== null && flameVal !== null && humidVal !== null) {
-                console.log(`Decrypted Data: Smoke = ${ smokeVal }, Flame = ${ flameVal }, Humid = ${ humidVal }`);
+            if (smokeVal !== null && flameVal !== null && tempVal !== null) {
+                console.log(`Decrypted Data: Smoke = ${ smokeVal }, Flame = ${ flameVal }, Temp = ${ tempVal }`);
 
-                await SensorData.create({
-                    sensor_name: "Smoke Sensor",
-                    main_value: parseFloat(smokeVal),
-                });
-
-                await SensorData.create({
-                    sensor_name: "Flame Sensor",
-                    main_value: parseFloat(flameVal),
-                });
-
-                await SensorData.create({
-                    topic: topic,
-                    sensor_name: "Humid Sensor",
-                    main_value: parseFloat(humidVal),
-                });
+                await SensorData.create({ sensor_name: "Smoke Sensor", main_value: parseFloat(smokeVal) });
+                await SensorData.create({ sensor_name: "Flame Sensor", main_value: parseFloat(flameVal) });
+                await SensorData.create({ sensor_name: "Temp Sensor", main_value: parseFloat(tempVal) });
             } else {
                 console.warn("Decrypting Failed");
             }

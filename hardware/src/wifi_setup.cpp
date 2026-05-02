@@ -24,6 +24,20 @@ void configModeCallback(WiFiManager *my_wifi) {
     Serial.print("ID: "); Serial.println(WiFi.softAPIP());
 }
 
+void setAPmode(WiFiManager &wm) {
+        if (xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
+        Serial.println("Connecting ....");
+        if (!wm.autoConnect("Yolo_Fire_System", "12345678")) {
+            Serial.println("Connection Failed!");
+            ESP.restart();
+        } else {
+            Serial.println("Wifi is connected!");
+        }
+
+        xSemaphoreGive(xWifiMutex);
+    }
+}
+
 void vTaskWifi(void* pvParameters) {
 
     WiFiManager wm;
@@ -50,17 +64,8 @@ void vTaskWifi(void* pvParameters) {
     wm.setAPCallback(configModeCallback);
     wm.setConfigPortalTimeout(180);
 
-    if (xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
-        Serial.println("Connecting ....");
-        if (!wm.autoConnect("Yolo_Fire_System", "12345678")) {
-            Serial.println("Connection Failed!");
-            ESP.restart();
-        } else {
-            Serial.println("Wifi is connected!");
-        }
+    setAPmode(wm);
 
-        xSemaphoreGive(xWifiMutex);
-    }
     while (1) {
         if (digitalRead(BUTTON_CONFIG) == LOW) {
             delay(3000); // Hold 3 second
@@ -70,6 +75,7 @@ void vTaskWifi(void* pvParameters) {
                 ESP.restart();
             }
         }
+        
         if (WiFi.status() == WL_CONNECTED) {
             if(xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
                 Serial.println("Wifi still connect");
@@ -79,6 +85,7 @@ void vTaskWifi(void* pvParameters) {
         } else {
             if(xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
                 Serial.print("\nWifi is unconnected!");
+                setAPmode(wm);
                 xSemaphoreGive(xWifiMutex);
             }         
         }
