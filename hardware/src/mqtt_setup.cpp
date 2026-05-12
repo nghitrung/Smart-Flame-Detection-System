@@ -7,6 +7,7 @@ long lastPublishTime = 0;
 const long publishInterval = 3000;
 const uint32_t testDurationMs = 10000UL;
 const uint32_t emergencyDurationsMs = 20000UL;
+const char* DEVICE_ID = "101";
 
 byte aes_key[] = { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6,
                    0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C };
@@ -27,7 +28,7 @@ static void applyControlAction(const String& action) {
         manual_alarm_on = true;
         manual_alarm_ms = nowMs + testDurationMs;
         Serial.println("\n[CTRL] test_alarm accepted");
-    } else if (action == "rest_system") {
+    } else if (action == "reset_system") {
         manual_pump_on = false;
         manual_alarm_on = false;
         manual_emergency_on = false;
@@ -69,7 +70,7 @@ static void applyControlAction(const String& action) {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-    if (String(topic) != TOPIC_CONTROL) {
+    if (strcmp(topic, TOPIC_CONTROL) != 0) {
         return;
     }
 
@@ -81,13 +82,23 @@ void callback(char* topic, byte* payload, unsigned int length) {
         Serial.println(err.c_str());
         return;
     }
+    const char* roomId = doc["roomId"];
+    if (roomId != NULL) {
+        int targetRoomId = doc["roomId"].as<int>();
+        int currentRoomId = atoi(DEVICE_ID);
+        
+        if (targetRoomId != currentRoomId) {
+            Serial.printf("\n[CTRL] Ignored: targetRoomId %d does not match local %d\n", targetRoomId, currentRoomId);
+            return;
+        }
+    }
 
     const char* action = doc["action"];
-    if (action == NULL) {
-        Serial.println("\n[CTRL] missing action field");
-        return;
+    if (action != NULL) {
+        applyControlAction(String(action));
+    } else {
+        Serial.println("\n[CTRL] Missing 'action' field in JSON");
     }
-    applyControlAction(String(action));
 }
 
 String encryptData(String plainText) {
@@ -127,9 +138,9 @@ void vTaskMqtt(void* pvParameters) {
                     if (xMqttMutex != NULL && xSemaphoreTake(xMqttMutex, portMAX_DELAY) == pdPASS) {
                         Serial.printf("\nMQTT: Connecting to %s...", mqtt_server);
                         client.setServer(mqtt_server, 1883);
-                        String clientID = "101";
-                        if (client.connect(clientID.c_str(), "Flame_Detection_System", "123")){
+                        if (client.connect(DEVICE_ID, "Flame_Detection_System", "123")){
                             Serial.print("\nSUCCESS");
+                            client.subscribe(TOPIC_CONTROL); // Đăng ký nhận lệnh
                         } else {
                             Serial.print("\nFAILED, rc= "); Serial.println(client.state());
                         }
