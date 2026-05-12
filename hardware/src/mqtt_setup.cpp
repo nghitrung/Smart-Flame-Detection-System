@@ -69,6 +69,19 @@ static void applyControlAction(const String& action) {
     }
 }
 
+String decryptData(String encryptText) {
+    byte temp_iv[N_BLOCK];
+    memcpy(temp_iv, AES_IV, sizeof(AES_IV));
+
+    uint16_t msgLen = encryptText.length();
+
+    char clearText[128];
+
+    aesLib.decrypt64((char *)encryptText.c_str(), msgLen, (byte *)clearText, aes_key, sizeof(aes_key), temp_iv);
+
+    return String(clearText);
+}
+
 void callback(char* topic, byte* payload, unsigned int length) {
     if (strcmp(topic, TOPIC_CONTROL) != 0) {
         return;
@@ -82,9 +95,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
         Serial.println(err.c_str());
         return;
     }
-    const char* roomId = doc["roomId"];
-    if (roomId != NULL) {
-        int targetRoomId = doc["roomId"].as<int>();
+    const char* encrypted_roomId = doc["roomId"];
+    if (encrypted_roomId != NULL) {
+        String decrypted_roomId = decryptData(String(encrypted_roomId));
+        int targetRoomId = decrypted_roomId.toInt();
         int currentRoomId = atoi(DEVICE_ID);
         
         if (targetRoomId != currentRoomId) {
@@ -93,9 +107,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
         }
     }
 
-    const char* action = doc["action"];
-    if (action != NULL) {
-        applyControlAction(String(action));
+    const char* encrypted_action = doc["action"];
+    if (encrypted_action != NULL) {
+        String decrypted_action = decryptData(String(encrypted_action));
+
+        applyControlAction(decrypted_action);
     } else {
         Serial.println("\n[CTRL] Missing 'action' field in JSON");
     }
@@ -109,7 +125,7 @@ String encryptData(String plainText) {
 
     char cipher64[64];
 
-    aesLib.encrypt64((byte *)plainText.c_str(), msgLen, cipher64, aes_key, sizeof(aes_key), temp_iv);
+    aesLib.encrypt64((byte *)plainText.c_str(), msgLen, (char *)cipher64, aes_key, sizeof(aes_key), temp_iv);
 
     return String(cipher64);
 }
