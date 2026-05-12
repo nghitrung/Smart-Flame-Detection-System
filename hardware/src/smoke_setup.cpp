@@ -45,9 +45,9 @@ void vTaskSmoke(void *pvParameter) {
     while (1) {
 
         if (millis() - warmupStart < MQ2_WARMUP_MS) {
-            if (xSemaphoreTake(xSmokeMutex, portMAX_DELAY) == pdPASS) {
+            if (xSemaphoreTake(xDataMutex, portMAX_DELAY) == pdPASS) {
                 smoke_alert = false;
-                xSemaphoreGive(xSmokeMutex);
+                xSemaphoreGive(xDataMutex);
             }
             vTaskDelay(pdMS_TO_TICKS(1000));
             continue;
@@ -77,28 +77,23 @@ void vTaskSmoke(void *pvParameter) {
                 isCalibrated = true;
                 Serial.println("MQ2 Calibration Done!");
             }
-        
         }
-        if (xSmokeMutex != NULL && xSemaphoreTake(xSmokeMutex, portMAX_DELAY) == pdPASS) {
-            MQ2_1.update();
-            MQ2_2.update();
 
-            float rawInput1 = averagePPM(MQ2_1);
-            float rawInput2 = averagePPM(MQ2_2);
+        MQ2_1.update();
+        MQ2_2.update();
 
+        float rawInput1 = averagePPM(MQ2_1);
+        float rawInput2 = averagePPM(MQ2_2);
+
+        if (xDataMutex != NULL && xSemaphoreTake(xDataMutex, portMAX_DELAY) == pdPASS) {
             if (rawInput1 == - 1 || rawInput2 == -1) {
                 Serial.print("\n Value is unreadable!");
             } else {
                 smoke = (rawInput1 + rawInput2) / 2;
-                if (rawInput1 > MQ2_SMOKE_THRESHOLD || rawInput2 > MQ2_SMOKE_THRESHOLD) {
-                    smoke_alert = true;
-                } else {
-                    smoke_alert = false;
-                }
-
+                smoke_alert = (rawInput1 > MQ2_SMOKE_THRESHOLD || rawInput2 > MQ2_SMOKE_THRESHOLD) ? true : false;
                 Serial.printf("\nSmoke Signal: %.2f ", smoke);
             }
-            xSemaphoreGive(xSmokeMutex);
+            xSemaphoreGive(xDataMutex);
         }
         
         vTaskDelay(pdMS_TO_TICKS(500)); 

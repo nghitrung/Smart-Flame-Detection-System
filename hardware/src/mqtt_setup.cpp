@@ -127,7 +127,7 @@ void vTaskMqtt(void* pvParameters) {
                     if (xMqttMutex != NULL && xSemaphoreTake(xMqttMutex, portMAX_DELAY) == pdPASS) {
                         Serial.printf("\nMQTT: Connecting to %s...", mqtt_server);
                         client.setServer(mqtt_server, 1883);
-                        String clientID = "YoloUno-Trung";
+                        String clientID = "101";
                         if (client.connect(clientID.c_str(), "Flame_Detection_System", "123")){
                             Serial.print("\nSUCCESS");
                         } else {
@@ -153,6 +153,6 @@ void vTaskMqtt(void* pvParameters) {
             }
         }
 
-        vTaskDelay(pdMS_TO_TICKS(3000)); // MQTT beat
+        vTaskDelay(pdMS_TO_TICKS(50)); // MQTT beat
     }
 }

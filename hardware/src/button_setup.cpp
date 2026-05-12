@@ -4,7 +4,7 @@ void vTaskButton(void* pvParameters) {
     pinMode(BUTTON_PIN, INPUT_PULLUP);
 
     while (1) {
-        if (xButtonMutex != NULL && xSemaphoreTake(xButtonMutex, portMAX_DELAY) == pdPASS) {
+        if (xOutputMutex != NULL && xSemaphoreTake(xOutputMutex, portMAX_DELAY) == pdPASS) {
             if (digitalRead(BUTTON_PIN) == LOW) {
                 delay(50);
                 if (digitalRead(BUTTON_PIN) == LOW) {
@@ -18,7 +18,9 @@ void vTaskButton(void* pvParameters) {
                 }
             }
 
-            xSemaphoreGive(xButtonMutex);
+            xSemaphoreGive(xOutputMutex);
         }
+
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }

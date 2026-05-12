@@ -13,25 +13,25 @@ void vTaskTemp(void *pvParameter) {
 
     while (1) {
         if (millis() - warmupStart < TEMP_WARMUP_MS) {
-            if (xSemaphoreTake(xTempMutex, portMAX_DELAY) == pdPASS) {
-                xSemaphoreGive(xTempMutex);
+            if (xSemaphoreTake(xDataMutex, portMAX_DELAY) == pdPASS) {
+                xSemaphoreGive(xDataMutex);
             }
             vTaskDelay(pdMS_TO_TICKS(1000));
             continue;
         }
 
-        if (xTempMutex != NULL && xSemaphoreTake(xTempMutex, portMAX_DELAY) == pdPASS) {
-            dht20.read();
-            float rawInput = dht20.getTemperature();
+        dht20.read();
+        float rawInput = dht20.getTemperature();
 
+        if (xDataMutex != NULL && xSemaphoreTake(xDataMutex, portMAX_DELAY) == pdPASS) {
             if (isnan(rawInput)) {
                 Serial.print("\nValue is unreadable!");
             } else {
                 temp = rawInput;
-            
+                temp_alert = (temp > TEMP_SANITY_MAX) ? true : false;
                 Serial.printf("\nTemp Detect: %.2f", temp);
             }
-            xSemaphoreGive(xTempMutex);
+            xSemaphoreGive(xDataMutex);
         }
 
         vTaskDelay(pdMS_TO_TICKS(500));

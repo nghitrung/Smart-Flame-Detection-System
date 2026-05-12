@@ -37,11 +37,7 @@ extern volatile uint32_t manual_alarm_ms;
 extern volatile uint32_t manual_emergency_ms;
 
 extern SemaphoreHandle_t xMqttMutex;
-extern SemaphoreHandle_t xWifiMutex;
-extern SemaphoreHandle_t xSmokeMutex;
-extern SemaphoreHandle_t xTempMutex;
-extern SemaphoreHandle_t xFlameMutex;
-extern SemaphoreHandle_t xButtonMutex;
+extern SemaphoreHandle_t xDataMutex;
 extern SemaphoreHandle_t xOutputMutex;
 
 #endif

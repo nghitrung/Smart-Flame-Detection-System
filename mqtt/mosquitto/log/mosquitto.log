@@ -4314,3 +4314,70 @@ To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
 1778170830: New client connected from 172.18.0.1:48084 as mqtt-explorer-e252d969 (p4, c1, k60, u'Flame_Detection_System').
 1778170910: New connection from 172.18.0.1:33388 on port 1883.
 1778170910: New client connected from 172.18.0.1:33388 as YoloUno-Trung (p4, c1, k15, u'Flame_Detection_System').
+1778171506: mosquitto version 2.1.2 terminating
+1778518692: mosquitto version 2.1.2 starting
+1778518692: Config loaded from /mosquitto/config/mosquitto.conf.
+1778518692: Bridge support available.
+1778518692: Persistence support available.
+1778518692: TLS support available.
+1778518692: TLS-PSK support available.
+1778518692: Websockets support available.
+1778518692: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1778518692: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1778518692: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1778518692: Plugin builtin-security has registered to receive 'basic-auth' events.
+1778518692: Opening ipv4 listen socket on port 1883.
+1778518692: Opening ipv6 listen socket on port 1883.
+1778518692: Opening ipv4 listen socket on port 9001.
+1778518692: Opening ipv6 listen socket on port 9001.
+1778518692: mosquitto version 2.1.2 running
+1778551996: mosquitto version 2.1.2 starting
+1778551996: Config loaded from /mosquitto/config/mosquitto.conf.
+1778551996: Bridge support available.
+1778551996: Persistence support available.
+1778551996: TLS support available.
+1778551996: TLS-PSK support available.
+1778551996: Websockets support available.
+1778551996: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1778551996: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1778551996: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1778551996: Plugin builtin-security has registered to receive 'basic-auth' events.
+1778551996: Opening ipv4 listen socket on port 1883.
+1778551996: Opening ipv6 listen socket on port 1883.
+1778551996: Opening ipv4 listen socket on port 9001.
+1778551996: Opening ipv6 listen socket on port 9001.
+1778551996: mosquitto version 2.1.2 running
+1778552041: mosquitto version 2.1.2 terminating
+1778552163: mosquitto version 2.1.2 starting
+1778552163: Config loaded from /mosquitto/config/mosquitto.conf.
+1778552163: Bridge support available.
+1778552163: Persistence support available.
+1778552163: TLS support available.
+1778552163: TLS-PSK support available.
+1778552163: Websockets support available.
+1778552163: Warning: File /mosquitto/config/pwfile has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/pwfile`.
+
+1778552163: Warning: File /mosquitto/config/pwfile owner is not mosquitto. Future versions will refuse to load this file.To fix this, use `chown mosquitto /mosquitto/config/pwfile`.
+
+1778552163: Warning: File /mosquitto/config/pwfile group is not mosquitto. Future versions will refuse to load this file.
+
+1778552163: Plugin builtin-security has registered to receive 'basic-auth' events.
+1778552163: Opening ipv4 listen socket on port 1883.
+1778552163: Opening ipv6 listen socket on port 1883.
+1778552163: Opening ipv4 listen socket on port 9001.
+1778552163: Opening ipv6 listen socket on port 9001.
+1778552163: mosquitto version 2.1.2 running
+1778552170: New connection from 172.18.0.4:46734 on port 1883.
+1778552170: New client connected from 172.18.0.4:46734 as mqttjs_7c20cd4d (p4, c1, k60, u'Flame_Detection_System').
+1778552195: New connection from 172.18.0.1:47920 on port 1883.
+1778552195: New client connected from 172.18.0.1:47920 as mqtt-explorer-e252d969 (p4, c1, k60, u'Flame_Detection_System').
+1778552501: mosquitto version 2.1.2 terminating

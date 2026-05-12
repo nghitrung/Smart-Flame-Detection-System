@@ -18,10 +18,6 @@ volatile uint32_t manual_alarm_ms = 0;
 volatile uint32_t manual_emergency_ms = 0;
 
 SemaphoreHandle_t xMqttMutex = NULL;
-SemaphoreHandle_t xWifiMutex = NULL;
-SemaphoreHandle_t xFlameMutex = NULL;
-SemaphoreHandle_t xSmokeMutex = NULL;
-SemaphoreHandle_t xTempMutex = NULL;
-SemaphoreHandle_t xButtonMutex = NULL;
+SemaphoreHandle_t xDataMutex = NULL;
 SemaphoreHandle_t xOutputMutex = NULL;
 

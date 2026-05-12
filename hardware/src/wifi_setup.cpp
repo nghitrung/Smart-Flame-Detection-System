@@ -9,6 +9,8 @@ char mqtt_server[40];
 
 WiFiManagerParameter custom_mqtt_server("server", "MQTT Server IP", mqtt_server, 40);
 
+WiFiManager wm;
+
 void saveConfigCallback() {
     strcpy(mqtt_server, custom_mqtt_server.getValue());
 
@@ -19,28 +21,7 @@ void saveConfigCallback() {
     Serial.printf("\n IP is saved into Flash: %s \n", mqtt_server);
 }
 
-void configModeCallback(WiFiManager *my_wifi) {
-    Serial.print("SSID: "); Serial.println(my_wifi->getConfigPortalSSID());
-    Serial.print("ID: "); Serial.println(WiFi.softAPIP());
-}
-
-void setAPmode(WiFiManager &wm) {
-        if (xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
-        Serial.println("Connecting ....");
-        if (!wm.autoConnect("Yolo_Fire_System", "12345678")) {
-            Serial.println("Connection Failed!");
-            ESP.restart();
-        } else {
-            Serial.println("Wifi is connected!");
-        }
-
-        xSemaphoreGive(xWifiMutex);
-    }
-}
-
 void vTaskWifi(void* pvParameters) {
-
-    WiFiManager wm;
 
     // Open mqtt_cfg (like a dictionary), True = Read-only mode 
     prefs.begin("mqtt_config", true);
@@ -56,15 +37,18 @@ void vTaskWifi(void* pvParameters) {
 
     wm.setDarkMode(true);
     wm.setTitle("Flame-Detection-System");
-
     wm.addParameter(&custom_mqtt_server);
-
     wm.setSaveConfigCallback(saveConfigCallback);
-
-    wm.setAPCallback(configModeCallback);
     wm.setConfigPortalTimeout(180);
 
-    setAPmode(wm);
+    if (!wm.autoConnect("Yolo_Fire_System", "12345678")) {
+        Serial.println("Connection Failed!");
+        vTaskDelay(pdMS_TO_TICKS(1000));
+        ESP.restart();
+    } 
+
+    WiFi.setAutoReconnect(true);
+    WiFi.persistent(true);
 
     while (1) {
         if (digitalRead(BUTTON_CONFIG) == LOW) {
@@ -76,19 +60,11 @@ void vTaskWifi(void* pvParameters) {
             }
         }
         
-        if (WiFi.status() == WL_CONNECTED) {
-            if(xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
-                Serial.println("Wifi still connect");
-                Serial.print("IP: "); Serial.println(WiFi.localIP());
-                xSemaphoreGive(xWifiMutex);
-            }
+        if (WiFi.status() != WL_CONNECTED) {
+            WiFi.reconnect();
+            vTaskDelay(pdMS_TO_TICKS(5000));
         } else {
-            if(xWifiMutex != NULL && xSemaphoreTake(xWifiMutex, portMAX_DELAY) == pdPASS) {
-                Serial.print("\nWifi is unconnected!");
-                setAPmode(wm);
-                xSemaphoreGive(xWifiMutex);
-            }         
+            vTaskDelay(pdMS_TO_TICKS(2000)); 
         }
-        vTaskDelay(pdMS_TO_TICKS(3000)); 
     } 
 }
