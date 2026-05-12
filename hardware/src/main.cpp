@@ -9,6 +9,7 @@
 #include "button_setup.h"
 #include "buzz_setup.h"
 #include "led_setup.h"
+#include "pump_setup.h"
 
 void setup() {
     Serial.begin(115200);
@@ -35,6 +36,8 @@ void setup() {
         xTaskCreate(vTaskBuzz, "Buzz_Task", 2048, NULL, 2, NULL);
         
         xTaskCreate(vTaskLed, "Led_Task", 2048, NULL, 2, NULL);
+
+        xTaskCreate(vTaskPump, "Pump_Task", 2048, NULL, 2, NULL);
         
         Serial.println("System is working!");
     } else {
