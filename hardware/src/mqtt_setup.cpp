@@ -95,26 +95,35 @@ void callback(char* topic, byte* payload, unsigned int length) {
         Serial.println(err.c_str());
         return;
     }
-    const char* encrypted_roomId = doc["roomId"];
-    if (encrypted_roomId != NULL) {
-        String decrypted_roomId = decryptData(String(encrypted_roomId));
-        int targetRoomId = decrypted_roomId.toInt();
+
+    const char* encrypted_cmd = doc["cmd_enc_value"];
+    if (encrypted_cmd != NULL) {
+        String decrypted_cmd = decryptData(String(encrypted_cmd));
+        decrypted_cmd.trim();
+        doc.clear();
+        DeserializationError decErr = deserializeJson(doc, decrypted_cmd);
+        if (decErr) {
+            Serial.print("\n[CTRL] Decrypt JSON parse error: ");
+            Serial.println(decErr.c_str());
+            return;
+        }
+    }
+
+    if (!doc["roomId"].isNull()) {
+        int targetRoomId = doc["roomId"].as<int>();
         int currentRoomId = atoi(DEVICE_ID);
-        
-        if (targetRoomId != currentRoomId) {
+        if (targetRoomId == currentRoomId) {
+            if (doc["action"].isNull()) {
+                applyControlAction(doc["action"]);
+            } else {
+                Serial.println("\n[CTRL] Missing 'action' field in JSON");
+            }
+        } else {
             Serial.printf("\n[CTRL] Ignored: targetRoomId %d does not match local %d\n", targetRoomId, currentRoomId);
             return;
         }
     }
 
-    const char* encrypted_action = doc["action"];
-    if (encrypted_action != NULL) {
-        String decrypted_action = decryptData(String(encrypted_action));
-
-        applyControlAction(decrypted_action);
-    } else {
-        Serial.println("\n[CTRL] Missing 'action' field in JSON");
-    }
 }
 
 String encryptData(String plainText) {
@@ -133,7 +142,8 @@ String encryptData(String plainText) {
 void packageData() {
     JsonDocument doc;
     char buffer[512];
-
+    
+    doc["room_enc_value"] = encryptData(String(DEVICE_ID));
     doc["smoke_enc_value"] = encryptData(String(smoke));
     doc["flame_enc_value"] = encryptData(String(flame));
     doc["temp_enc_value"] = encryptData(String(temp));
