@@ -99,9 +99,16 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
 
     JsonDocument doc;
+    DeserializationError err = deserializeJson(doc, payload, length);
+    
+    if (err) {
+        Serial.print("\n[CTRL] invalid JSON: ");
+        Serial.println(err.c_str());
+        return;
+    }
 
-    const char* encrypted_cmd = doc["cmd_enc_value"];
-    if (encrypted_cmd != NULL) {
+    if (!doc["cmd_enc_value"].isNull()) {
+        const char* encrypted_cmd = doc["cmd_enc_value"];
         String decrypted_cmd = decryptData(String(encrypted_cmd));
         decrypted_cmd.trim();
         doc.clear();
@@ -123,6 +130,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     }
 
     if (!doc["action"].isNull()) {
+        const char *action = doc["action"];
         applyControlAction(doc["action"].as<String>());
     } else {
         Serial.println("\n[CTRL] Missing 'action' field in JSON");
